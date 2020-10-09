@@ -5,8 +5,14 @@ module.exports = {
   getResources,
   getTasks,
   addProject,
-  addResource,
+//   addResource,
+//   addTask,
+//   addProjectTask,
   getByProjectId,
+  getByResourceId,
+  getByTaskId,
+//   remove,
+//   update
 };
 
 function getProjects() {
@@ -29,18 +35,15 @@ function getByResourceId(id) {
   return db("resources").where({ id }).first();
 }
 
+function getByTaskId(id) {
+  return db("tasks").where({ id }).first();
+}
+
 function addProject(data) {
   return db('projects').insert(data, "id")
   .then(ids => {
     const id = ids[0];
     return getByProjectId(id);
   })
-}
 
-function addResource(data) {
-  return db('resources').insert(data, "id")
-  .then(ids => {
-    const id = ids[0];
-    return getByResourceId(id);
-  })
 }
